@@ -3,14 +3,17 @@ DEBUG=-g
 LIBS= -lgtest -lpthread -std=c++11
 CFLAGS=
 
-install: hypothesis_test.cu 
-	$(CC) -o hypothesis_test hypothesis_test.cu 
+install: hypothesis_test.cu install2 
+	$(CC) -o hypothesis_test hypothesis_test.cu
+ 
+install2: Gtest.cu final.cu
+	$(CC) -o Gtest Gtest.cu $(LIBS)
 
-run: 
-	./hypothesis_test
+run:
+	./hypothesis_test 
 
-test: test.cu final.cu
-	$(CC) -o test test.cu $(LIBS) 
+test: 
+	./Gtest
 
-random : random.cu
+random : random.cu 
 	$(CC) -o random random.cu
